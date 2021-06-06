@@ -75,4 +75,17 @@ defmodule MyAppWeb.Router do
     post "/users/confirm", UserConfirmationController, :create
     get "/users/confirm/:token", UserConfirmationController, :confirm
   end
+
+  # JSON Authentication routes
+  scope "/api/v1", MyAppWeb.JsonApi, as: :json_api do
+    pipe_through :api
+
+    post "/users/register", UserRegistrationController, :create
+    post "/users/log_in", UserSessionController, :create
+
+    get "/users/reset_password", UserResetPasswordController, :new
+    post "/users/reset_password", UserResetPasswordController, :create
+    get "/users/reset_password/:token", UserResetPasswordController, :edit
+    put "/users/reset_password/:token", UserResetPasswordController, :update
+  end
 end
