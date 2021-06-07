@@ -1,4 +1,4 @@
-defmodule MyAppWeb.JsonApi.UserLoginControllerTest do
+defmodule MyAppWeb.JsonApi.UserSessionControllerTest do
   use MyAppWeb.ConnCase, async: true
 
   import MyApp.AccountsFixtures
@@ -9,13 +9,13 @@ defmodule MyAppWeb.JsonApi.UserLoginControllerTest do
 
   describe "POST /api/session" do
     test "with no credentials user can't login", %{conn: conn} do
-      conn = post(conn, Routes.json_api_user_login_path(conn, :create), email: nil, password: nil)
+      conn = post(conn, Routes.json_api_user_session_path(conn, :create), email: nil, password: nil)
       assert %{"message" => "User could not be authenticated"} = json_response(conn, 401)
     end
 
     test "with invalid password user cant login", %{conn: conn, user: user} do
       conn =
-        post(conn, Routes.json_api_user_login_path(conn, :create),
+        post(conn, Routes.json_api_user_session_path(conn, :create),
           email: user.email,
           password: "wrongpass"
         )
@@ -25,7 +25,7 @@ defmodule MyAppWeb.JsonApi.UserLoginControllerTest do
 
     test "with valid password user can login", %{conn: conn, user: user} do
       conn =
-        post(conn, Routes.json_api_user_login_path(conn, :create),
+        post(conn, Routes.json_api_user_session_path(conn, :create),
           email: user.email,
           password: valid_user_password()
         )

@@ -1,4 +1,4 @@
-defmodule MyAppWeb.JsonApi.UserLoginController do
+defmodule MyAppWeb.JsonApi.UserSessionController do
   use MyAppWeb, :controller
 
   alias MyApp.Accounts

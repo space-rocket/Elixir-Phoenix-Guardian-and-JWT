@@ -81,7 +81,7 @@ defmodule MyAppWeb.Router do
     pipe_through :api
 
     post "/users/register", UserRegistrationController, :create
-    post "/users/log_in", UserLoginController, :create
+    post "/users/log_in", UserSessionController, :create
 
     get "/users/reset_password", UserResetPasswordController, :new
     post "/users/reset_password", UserResetPasswordController, :create
