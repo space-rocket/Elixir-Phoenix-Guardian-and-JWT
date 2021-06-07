@@ -13,6 +13,10 @@ defmodule MyAppWeb.Router do
     plug :fetch_current_user
   end
 
+  pipeline :require_jwt do
+    plug Guardian.Plug.EnsureAuthenticated
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -87,5 +91,11 @@ defmodule MyAppWeb.Router do
     post "/users/reset_password", UserResetPasswordController, :create
     get "/users/reset_password/:token", UserResetPasswordController, :edit
     put "/users/reset_password/:token", UserResetPasswordController, :update
+  end
+
+  # JWT Protected routes
+  scope "/api/v1", MyAppWeb.JsonApi, as: :json_api do
+    pipe_through [:api, :require_jwt]
+
   end
 end
