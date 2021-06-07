@@ -63,6 +63,10 @@ mix ecto.migrate
 
 ## Configure Guardian
 
+```bash
+mix phx.gen.secret
+# jmLFS2lrpiLffUt+2BXpQuaiv8DQuFvonME/QT49q7tAW2zIIYiJgGlN5RWLxiCt
+```
 
 ```elixir
 # config/config.exs
@@ -70,7 +74,7 @@ mix ecto.migrate
 
 config :my_app, MyApp.Guardian,
   issuer: "my_app",
-  secret_key: "EI2tyig/pR4E5LD/PbEpU+aMGlbGR5g6JCktEqrVzU6dVO8YK/QkLGCWFM4lPWAE",
+  secret_key: "jmLFS2lrpiLffUt+2BXpQuaiv8DQuFvonME/QT49q7tAW2zIIYiJgGlN5RWLxiCt",
   ttl: {3, :days}
 
 
